@@ -19,6 +19,7 @@ package com.github.rubensousa.bottomsheetbuilder.adapter;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.core.graphics.drawable.DrawableCompat;
 import android.view.MenuItem;
 
@@ -39,8 +40,16 @@ class BottomSheetMenuItem implements BottomSheetItem {
     @DrawableRes
     private int mBackground;
 
+    @LayoutRes
+    private int mCustomLayoutRes;
+
     public BottomSheetMenuItem(MenuItem item, @ColorInt int textColor, @DrawableRes int background,
                                @ColorInt int tintColor) {
+        this(item, textColor, background, tintColor, 0);
+    }
+
+    public BottomSheetMenuItem(MenuItem item, @ColorInt int textColor, @DrawableRes int background,
+                               @ColorInt int tintColor, @LayoutRes int customLayoutRes) {
         mMenuItem = item;
         mIcon = item.getIcon();
         mId = item.getItemId();
@@ -48,6 +57,7 @@ class BottomSheetMenuItem implements BottomSheetItem {
         mTextColor = textColor;
         mBackground = background;
         mTintColor = tintColor;
+        mCustomLayoutRes = customLayoutRes;
 
         // Check if we have a tint to be applied to an icon
         if (mTintColor != -1 && mIcon != null) {
@@ -81,5 +91,12 @@ class BottomSheetMenuItem implements BottomSheetItem {
     @Override
     public String getTitle() {
         return mTitle;
+    }
+
+    public Integer getCustomLayoutRes() {
+        if (mCustomLayoutRes > 0) {
+            return mCustomLayoutRes;
+        }
+        return null;
     }
 }

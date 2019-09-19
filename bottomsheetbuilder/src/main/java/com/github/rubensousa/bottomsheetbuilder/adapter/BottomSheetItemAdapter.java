@@ -60,7 +60,14 @@ class BottomSheetItemAdapter extends RecyclerView.Adapter<BottomSheetItemAdapter
         BottomSheetItem item = mItems.get(position);
 
         if (item instanceof BottomSheetMenuItem) {
-            return TYPE_ITEM;
+            BottomSheetMenuItem menuItem = (BottomSheetMenuItem) item;
+            Integer layoutRes = menuItem.getCustomLayoutRes();
+
+            if (layoutRes != null) {
+                return layoutRes;
+            } else {
+                return TYPE_ITEM;
+            }
         } else if (item instanceof BottomSheetDivider) {
             return TYPE_DIVIDER;
         } else if (item instanceof BottomSheetHeader) {
@@ -99,6 +106,9 @@ class BottomSheetItemAdapter extends RecyclerView.Adapter<BottomSheetItemAdapter
                         .inflate(R.layout.bottomsheetbuilder_list_divider, parent, false));
             }
 
+            // custom layout
+            return new ItemViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(viewType, parent, false));
         }
 
         return new ViewHolder(LayoutInflater.from(parent.getContext())

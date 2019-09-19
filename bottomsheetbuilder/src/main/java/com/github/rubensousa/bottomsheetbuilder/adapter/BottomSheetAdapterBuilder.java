@@ -20,6 +20,7 @@ package com.github.rubensousa.bottomsheetbuilder.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import androidx.annotation.LayoutRes;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -69,13 +70,19 @@ public class BottomSheetAdapterBuilder {
     }
 
     public void addItem(int id, String title, Drawable icon, int itemTextColor,
-                        int itemBackground, int tintColor) {
+                        int itemBackground, int tintColor, @LayoutRes int customLayoutRes) {
         if (mMenu == null) {
             mMenu = new MenuBuilder(mContext);
         }
         MenuItem item = mMenu.add(Menu.NONE, id, Menu.NONE, title);
         item.setIcon(icon);
-        mItems.add(new BottomSheetMenuItem(item, itemTextColor, itemBackground, tintColor));
+        mItems.add(new BottomSheetMenuItem(item, itemTextColor, itemBackground, tintColor,
+                customLayoutRes));
+    }
+
+    public void addItem(int id, String title, Drawable icon, int itemTextColor,
+                        int itemBackground, int tintColor) {
+        addItem(id, title, icon, itemTextColor, itemBackground, tintColor, 0);
     }
 
     @SuppressLint("InflateParams")

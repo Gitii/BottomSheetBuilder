@@ -23,6 +23,7 @@ import android.os.Build;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
@@ -147,6 +148,18 @@ public class BottomSheetBuilder {
 
     public BottomSheetBuilder addItem(int id, @StringRes int title, Drawable icon) {
         return addItem(id, mContext.getString(title), icon);
+    }
+
+    public BottomSheetBuilder addItem(int id, String title, Drawable icon, @LayoutRes int layoutRes) {
+        mAdapterBuilder.addItem(id, title, icon, mItemTextColor,
+                mItemBackground, mIconTintColor, layoutRes);
+        return this;
+    }
+
+    public BottomSheetBuilder addItem(int id, @LayoutRes int layoutRes) {
+        mAdapterBuilder.addItem(id, "", null, mItemTextColor,
+                mItemBackground, mIconTintColor, layoutRes);
+        return this;
     }
 
     public BottomSheetBuilder addItem(int id, String title, @DrawableRes int icon) {

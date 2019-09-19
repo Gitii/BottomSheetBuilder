@@ -1,1 +1,1 @@
-include ':sample', ':bottomsheetbuilder'
+include ':bottomsheetbuilder'
